@@ -13,9 +13,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
      */
     private String[] mDataset;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
+    /**
+     * コンストラクタ
+     *
+     * @param myDataset 一覧するデータ内容を配列で受け取り、プロパティとして保持する
+     */
+    public MyAdapter(String[] myDataset) {
+        mDataset = myDataset;
+    }
+
+    /**
+     * 各データ項目のビューへの参照を提供します
+     * 複雑なデータアイテムでは、アイテムごとに複数のビューが必要になる場合があります。
+     * ビューホルダー内のデータアイテムのすべてのビューにアクセスできるようにします。
+     */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView textView;
@@ -26,32 +37,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String[] myDataset) {
-        mDataset = myDataset;
-    }
-
-   // Create new views (invoked by the layout manager)
+    /**
+     * View生成
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
-        // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_view_item, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;
+        return new MyViewHolder(v);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     * Viewの内容を置き換える
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+        // この位置にあるデータセットから要素を取得します
+        // ビューの内容をその要素に置き換えます
         holder.textView.setText(mDataset[position]);
-
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    /**
+     * データ・セット総数を返す
+     *
+     * @return int
+     */
     @Override
     public int getItemCount() {
         return mDataset.length;
