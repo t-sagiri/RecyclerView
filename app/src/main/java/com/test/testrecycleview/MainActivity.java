@@ -1,9 +1,13 @@
 package com.test.testrecycleview;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import java.util.List;
 
 /**
  * メイン画面
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * listに表示する内容
      */
-    protected String[] mDataset;
+    protected List<ApplicationInfo> mAppInfoList;
 
     /**
      * 画面表示
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // listに表示する内容を生成、アダプタにセット
         initDataset();
-        mAdapter = new MyAdapter(mDataset);
+        mAdapter = new MyAdapter(mAppInfoList);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -57,10 +61,12 @@ public class MainActivity extends AppCompatActivity {
      * DATASET_COUNTの分だけデータを生成して、mDatasetにセットする
      */
     private void initDataset() {
-        mDataset = new String[DATASET_COUNT];
-        int i;
-        for (i = 0; i < DATASET_COUNT; i++) {
+        PackageManager pm = getPackageManager();
+        mAppInfoList = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+/*        mDataset = new String[DATASET_COUNT];
+        for (int i = 0; i < DATASET_COUNT; i++) {
             mDataset[i] = "This is element #" + i;
-        }
+        } */
     }
 }

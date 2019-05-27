@@ -1,25 +1,28 @@
 package com.test.testrecycleview;
 
+import android.content.pm.ApplicationInfo;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     /*
-     * データ
+     * 一覧のデータ
      */
-    private String[] mDataset;
+    private List<ApplicationInfo> appInfoList;
 
     /**
      * コンストラクタ
      *
      * @param myDataset 一覧するデータ内容を配列で受け取り、プロパティとして保持する
      */
-    public MyAdapter(String[] myDataset) {
-        mDataset = myDataset;
+    MyAdapter(List myDataset) {
+        appInfoList = myDataset;
     }
 
     /**
@@ -27,22 +30,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
      * 複雑なデータアイテムでは、アイテムごとに複数のビューが必要になる場合があります。
      * ビューホルダー内のデータアイテムのすべてのビューにアクセスできるようにします。
      */
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView textView;
+        TextView textView1;
+        TextView textView2;
 
-        public MyViewHolder(View v1) {
+        MyViewHolder(View v1) {
             super(v1);
-            textView = v1.findViewById(R.id.textView1);
+            textView1 = v1.findViewById(R.id.textView1);
+            textView2 = v1.findViewById(R.id.textView2);
         }
     }
 
     /**
      * View生成
-     *
-     * @param parent
-     * @param viewType
-     * @return
+     * {@inheritDoc}
      */
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
@@ -54,24 +56,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     /**
      * Viewの内容を置き換える
-     *
-     * @param holder
-     * @param position
+     * {@inheritDoc}
      */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // この位置にあるデータセットから要素を取得します
         // ビューの内容をその要素に置き換えます
-        holder.textView.setText(mDataset[position]);
+        ApplicationInfo appInfo = appInfoList.get(position);
+        holder.textView1.setText("# "  + position);
+        holder.textView2.setText(appInfo.packageName);
     }
 
     /**
      * データ・セット総数を返す
-     *
-     * @return int
+     * {@inheritDoc}
      */
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return appInfoList.size();
     }
 }
