@@ -1,6 +1,5 @@
 package com.test.testrecycleview;
 
-import android.content.pm.ApplicationInfo;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +13,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     /*
      * 一覧のデータ
      */
-    private List<ApplicationInfo> appInfoList;
+    private List<AppInfo> mAppInfoList;
 
     /**
      * コンストラクタ
      *
      * @param myDataset 一覧するデータ内容を配列で受け取り、プロパティとして保持する
      */
-    MyAdapter(List myDataset) {
-        appInfoList = myDataset;
+    MyAdapter(List<AppInfo> myDataset) {
+        mAppInfoList = myDataset;
     }
 
     /**
@@ -62,9 +61,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // この位置にあるデータセットから要素を取得します
         // ビューの内容をその要素に置き換えます
-        ApplicationInfo appInfo = appInfoList.get(position);
-        holder.textView1.setText("# "  + position);
-        holder.textView2.setText(appInfo.packageName);
+        AppInfo appInfo = mAppInfoList.get(position);
+        holder.textView1.setText(appInfo.getName());
+        holder.textView2.setText(appInfo.getPackageName());
     }
 
     /**
@@ -73,6 +72,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
      */
     @Override
     public int getItemCount() {
-        return appInfoList.size();
+        return mAppInfoList.size();
     }
 }

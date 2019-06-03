@@ -18,11 +18,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     // private static final String TAG = "MainActivity";
 
-    /**
-     * listに表示する要素数
-     */
-    private static final int DATASET_COUNT = 60;
-
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -30,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * listに表示する内容
      */
-    protected List<ApplicationInfo> mAppInfoList;
+    protected List<AppInfo> mAppInfoList;
 
     /**
      * 画面表示
@@ -58,15 +53,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * DATASET_COUNTの分だけデータを生成して、mDatasetにセットする
+     * 一覧に表示するデータを生成
      */
     private void initDataset() {
         PackageManager pm = getPackageManager();
-        mAppInfoList = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        List<ApplicationInfo> appInfoList = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
-/*        mDataset = new String[DATASET_COUNT];
-        for (int i = 0; i < DATASET_COUNT; i++) {
-            mDataset[i] = "This is element #" + i;
-        } */
+        for (ApplicationInfo appInfo: appInfoList) {
+            AppInfo ai = new AppInfo(appInfo, pm);
+            mAppInfoList.add(ai);
+        }
     }
 }
