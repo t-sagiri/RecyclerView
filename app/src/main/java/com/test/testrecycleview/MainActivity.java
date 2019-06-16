@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * listに表示する内容
      */
-    protected List<AppInfo> mAppInfoList;
+    protected ArrayList<AppInfo> mAppInfoList;
 
     /**
      * 画面表示
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private void initDataset() {
         PackageManager pm = getPackageManager();
         List<ApplicationInfo> appInfoList = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        mAppInfoList = new ArrayList<AppInfo>(appInfoList.size());
 
         for (ApplicationInfo appInfo: appInfoList) {
             AppInfo ai = new AppInfo(appInfo, pm);

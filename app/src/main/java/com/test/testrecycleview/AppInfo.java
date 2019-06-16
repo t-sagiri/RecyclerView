@@ -24,20 +24,20 @@ class AppInfo {
      */
     private Drawable icon;
 
-    /**
+    /*
      * log用タグ
      */
     // private static final String TAG = "AppInfo";
 
     /**
      * コンストラクタ
-     *
-     * @param appInfo アプリ情報
+     *  @param appInfo アプリ情報
      * @param pm アプリ情報に必要なPackageManager
      */
-    AppInfo(ApplicationInfo appInfo, PackageManager pm) {
+    public AppInfo(ApplicationInfo appInfo, PackageManager pm) {
         this.name = appInfo.loadLabel(pm).toString();
         this.icon = appInfo.loadIcon(pm);
+        this.packageName = appInfo.packageName;
     }
 
     /**
@@ -55,7 +55,7 @@ class AppInfo {
      * @return ApplicationInfo,packageMame
      */
     String getPackageName() {
-        return packageName;
+        return this.packageName;
     }
 
     /**
@@ -64,6 +64,6 @@ class AppInfo {
      * @return Drawable icon
      */
     public Drawable getIcon() {
-        return icon;
+        return this.icon;
     }
 }

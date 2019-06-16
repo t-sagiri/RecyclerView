@@ -41,9 +41,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    /**
+    /*
      * View生成
-     * {@inheritDoc}
      */
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
@@ -53,9 +52,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return new MyViewHolder(v);
     }
 
-    /**
+    /*
      * Viewの内容を置き換える
-     * {@inheritDoc}
      */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
